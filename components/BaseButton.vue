@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
 interface Props {
   text: string;
   type?: "button" | "submit" | "reset";
@@ -21,11 +21,11 @@ const handleClick = (event: MouseEvent) => {
 
 <template>
   <button
-    :type="type"
+    :type="props.type"
     :disabled="disabled"
     class="capitalize py-2 px-4 bg-accent text-white rounded-xl font-bold text-lg"
     @click="handleClick"
   >
-    {{ text }}
+    {{ props.text }}
   </button>
 </template>
