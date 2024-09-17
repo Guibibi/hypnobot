@@ -24,10 +24,6 @@
             text="Get Started"
             class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
           />
-          <BaseButton
-            text="Learn More"
-            class="bg-white text-indigo-600 hover:bg-indigo-50"
-          />
         </div>
       </div>
     </main>
