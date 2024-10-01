@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const user = useSupabaseUser();
+const supabase = useSupabaseClient();
+
+const signOut = async () => {
+  supabase.auth.signOut();
+  await navigateTo("/");
+};
 </script>
 
 <template>
@@ -28,8 +34,9 @@ const user = useSupabaseUser();
 
         <!-- CTA Buttons -->
         <div class="flex items-center space-x-4">
-          <div v-if="user">
+          <div v-if="user" class="flex">
             <NuxtLink to="/home"><BaseButton>Dashboard</BaseButton></NuxtLink>
+            <BaseButton class="ml-4" @click="signOut">Logout</BaseButton>
           </div>
           <div v-else>
             <NuxtLink
