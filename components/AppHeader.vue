@@ -1,4 +1,6 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+const user = useSupabaseUser();
+</script>
 
 <template>
   <header class="absolute top-0 left-0 right-0 z-50">
@@ -26,12 +28,17 @@
 
         <!-- CTA Buttons -->
         <div class="flex items-center space-x-4">
-          <NuxtLink
-            to="/login"
-            class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-md hover:from-indigo-700 hover:to-purple-700 transition-colors duration-300 shadow-md hover:shadow-lg"
-          >
-            Get Started
-          </NuxtLink>
+          <div v-if="user">
+            <NuxtLink to="/home"><BaseButton>Dashboard</BaseButton></NuxtLink>
+          </div>
+          <div v-else>
+            <NuxtLink
+              to="/login"
+              class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-md hover:from-indigo-700 hover:to-purple-700 transition-colors duration-300 shadow-md hover:shadow-lg"
+            >
+              Get Started
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </nav>
