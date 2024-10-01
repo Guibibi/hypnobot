@@ -1,6 +1,5 @@
 <script setup lang="ts">
 interface Props {
-  text: string;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
 }
@@ -23,9 +22,9 @@ const handleClick = (event: MouseEvent) => {
   <button
     :type="props.type"
     :disabled="disabled"
-    class="capitalize py-2 px-4 bg-accent text-white rounded-xl font-bold text-lg"
+    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
     @click="handleClick"
   >
-    {{ props.text }}
+    <slot />
   </button>
 </template>
