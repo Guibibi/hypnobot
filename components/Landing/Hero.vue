@@ -15,10 +15,9 @@
       <div
         class="flex justify-center space-x-4 animate-fadeIn animation-delay-600"
       >
-        <BaseButton
-          text="Get Started"
-          class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
-        />
+        <BaseButton class="w-44 text-6xl text-white font-bold uppercase"
+          >Get Started
+        </BaseButton>
       </div>
     </div>
   </main>
