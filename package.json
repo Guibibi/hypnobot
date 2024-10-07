@@ -7,7 +7,8 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "supabase-types": "supabase gen types --lang=typescript --project-id bbbqooamrjvkhiwspgro > types/database.types.ts"
   },
   "dependencies": {
     "d3": "^7.9.0",
