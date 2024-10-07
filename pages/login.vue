@@ -16,6 +16,7 @@ const signInWithOtp = async () => {
     },
   });
   if (error) console.log(error);
+  alert("An email to login was sent");
 };
 
 const signInWithPassword = async () => {
@@ -24,6 +25,7 @@ const signInWithPassword = async () => {
     password: password.value,
   });
   if (error) errorMessage.value = error.message;
+  await navigateTo("/home");
 };
 </script>
 <template>
