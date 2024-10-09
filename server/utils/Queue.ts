@@ -38,33 +38,43 @@ class Queue<T> {
   }
 
   // Return the first element
-  async dequeue(): Promise<any | null> {
+  async dequeue(): Promise<T | undefined> {
     const tail = await this.getTail();
     const head = await this.getHead();
 
     if (head === tail) {
-      return null; // Queue is empty
+      return undefined; // Queue is empty
     }
 
     const newHead = head + 1;
     const item = await this.storage.getItem(`${this.queueName}:job:${head}`);
 
-    if (item) {
+    if (item !== null && typeof item === "string") {
       await this.storage.removeItem(`${this.queueName}:job:${head}`);
       await this.setHead(newHead);
-      return JSON.parse(item);
+      return JSON.parse(item) as T;
     }
 
-    return null;
-  }
-
-  // Peek at the first item
-  peek(): T | undefined {
     return undefined;
   }
 
+  // Peek at the first item
+  async peek(): Promise<T | undefined> {
+    const head = this.getHead();
+    const tail = this.getTail();
+
+    if (head === tail) {
+      return undefined;
+    }
+
+    const item = this.storage.getItem(`${this.queueName}:job:${head}`);
+    return item !== null && typeof item === "string" ? JSON.parse(item) : undefined;
+  }
+
   // Return if the queue is empty
-  isEmpty(): boolean {}
+  async isEmpty(): Promise<boolean> {
+    return await this.size() === 0;
+  }
 
   async size(): Promise<number> {
     const tail = await this.getTail();
@@ -73,11 +83,4 @@ class Queue<T> {
   }
 }
 
-interface Job {
-  timestamp: number;
-  prompt: string;
-}
-
-let scriptQueue: Queue<Job>;
-
-export default defineNitroPlugin((nitroApp) => {});
+export default Queue;
