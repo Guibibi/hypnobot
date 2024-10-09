@@ -25,7 +25,6 @@ export default defineEventHandler(async (event) => {
       return { error: result.error };
     }
 
-    console.log(result.data, result.count, result.status, result.statusText);
     return { success: "Sucessfully added the script" };
   } else {
     return { error: parsedPrompt.error };
