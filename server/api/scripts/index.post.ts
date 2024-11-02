@@ -1,8 +1,10 @@
 import { serverSupabaseUser, serverSupabaseClient } from "#supabase/server";
+import { useNuxtApp } from "nuxt/app";
 import { createScriptSchema } from "~/schemas/scripts";
 import { Database } from "~/types/database.types";
 
 export default defineEventHandler(async (event) => {
+  const { $queue } = useNuxtApp();
   const user = await serverSupabaseUser(event);
   const body = await readBody(event);
   const client = await serverSupabaseClient<Database>(event);
@@ -25,7 +27,11 @@ export default defineEventHandler(async (event) => {
       return { error: result.error };
     }
 
-    console.log(result.data, result.count, result.status, result.statusText);
+    await $queue.enqueue({
+      timestamp: Date.now(),
+      prompt: parsedPrompt.data,
+    });
+
     return { success: "Sucessfully added the script" };
   } else {
     return { error: parsedPrompt.error };
